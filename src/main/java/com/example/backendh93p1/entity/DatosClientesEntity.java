@@ -6,7 +6,7 @@ import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "datosclientes" ,catalog = "marketplace" , schema = "")
+@Table (name = "datosclientes")
 public class DatosClientesEntity {
 
     @Id
