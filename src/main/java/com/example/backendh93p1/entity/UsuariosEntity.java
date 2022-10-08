@@ -2,14 +2,17 @@ package com.example.backendh93p1.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table (name = "usuario")
-public class UsuariosEntity {
+public class UsuariosEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idusurios;
@@ -108,7 +111,38 @@ public class UsuariosEntity {
         this.usuariorolentity = usuariorolentity;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<Authority> autorizacion = new HashSet<>();
+        this.usuariorolentity.forEach(usuarioRolEntity -> {
+            autorizacion.add(new Authority(usuarioRolEntity.getRolusario().getNombrol()));
+        });
+        return autorizacion;
+    }
+
     public UsuariosEntity(){
 
     }
+
+
 }
