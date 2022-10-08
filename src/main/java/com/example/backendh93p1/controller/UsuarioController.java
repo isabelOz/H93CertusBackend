@@ -3,8 +3,8 @@ package com.example.backendh93p1.controller;
 import com.example.backendh93p1.entity.RolEntity;
 import com.example.backendh93p1.entity.UsuarioRolEntity;
 import com.example.backendh93p1.entity.UsuariosEntity;
-import com.example.backendh93p1.interfa.UsuarioInterface;
 import com.example.backendh93p1.repository.UsuarioRepository;
+import com.example.backendh93p1.services.UsuarioServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,13 +16,15 @@ import java.util.Set;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioInterface userInterface;
-    private UsuarioRepository userRepo;
+    private UsuarioServices userService;
 
     @GetMapping (value = "/{username}")
     public UsuariosEntity obtenerUsuario (@PathVariable("username") String username){
-        return userRepo.buscarUsuarioRepository(username);
+        UsuariosEntity userlocal = new UsuariosEntity();
+        userlocal = userService.obtenerUsuarioService(username);
+        return userlocal;
     }
+
 
     @PostMapping
     public UsuariosEntity agregarUsuario (@RequestBody UsuariosEntity userJsonEntity) throws Exception{
@@ -38,7 +40,7 @@ public class UsuarioController {
          userrol.setRolusario(rol);
 
         userRolController.add(userrol);
-        return userInterface.guardarUsuario(userJsonEntity,userRolController);
-    }
 
+        return userService.guardarUsuarioService(userJsonEntity,userRolController);
+    }
 }

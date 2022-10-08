@@ -12,18 +12,11 @@ public class RolEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idrol;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "")
-    private Set<UsuarioRolEntity> usuariorolentity = new HashSet<>();
-
-    public Set<UsuarioRolEntity> getUsuariorolentity() {
-        return usuariorolentity;
-    }
-
-    public void setUsuariorolentity(Set<UsuarioRolEntity> usuariorolentity) {
-        this.usuariorolentity = usuariorolentity;
-    }
-
     private String nombrol;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "rolusario")
+    private Set<UsuarioRolEntity> rolusuarioentity = new HashSet<>();
+
 
     public Integer getIdrol() {
         return idrol;
@@ -39,6 +32,14 @@ public class RolEntity {
 
     public void setNombrol(String nombrol) {
         this.nombrol = nombrol;
+    }
+
+    public Set<UsuarioRolEntity> getRolusuarioentity() {
+        return rolusuarioentity;
+    }
+
+    public void setRolusuarioentity(Set<UsuarioRolEntity> rolusuarioentity) {
+        this.rolusuarioentity = rolusuarioentity;
     }
 
     public RolEntity(){

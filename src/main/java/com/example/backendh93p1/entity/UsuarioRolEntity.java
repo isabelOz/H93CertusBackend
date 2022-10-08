@@ -9,13 +9,9 @@ public class UsuarioRolEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idusuariorol;
 
-
     @ManyToOne(fetch = FetchType.EAGER)
     private UsuariosEntity usuariorol;
-
-
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private RolEntity rolusario;
 
 

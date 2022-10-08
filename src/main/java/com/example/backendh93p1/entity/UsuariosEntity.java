@@ -1,6 +1,8 @@
 package com.example.backendh93p1.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,29 +15,21 @@ public class UsuariosEntity {
     private Integer idusurios;
 
     private String username;
-    @Column(name = "passworduser")
+
     private String password;
     private String nombuser;
     private String apelliuser;
     private String emailuser;
     private String telefuser;
     private String perfiluser;
-    @Column(name = "enableuser")
     private boolean enable = true;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "usuariorol")
+    @JsonIgnore
     private Set<UsuarioRolEntity> usuariorolentity = new HashSet<>();
 
     public Integer getIdusurios() {
         return idusurios;
-    }
-
-    public Set<UsuarioRolEntity> getUsuariorolentity() {
-        return usuariorolentity;
-    }
-
-    public void setUsuariorolentity(Set<UsuarioRolEntity> usuariorolentity) {
-        this.usuariorolentity = usuariorolentity;
     }
 
     public void setIdusurios(Integer idusurios) {
@@ -104,6 +98,14 @@ public class UsuariosEntity {
 
     public void setEnable(boolean enable) {
         this.enable = enable;
+    }
+
+    public Set<UsuarioRolEntity> getUsuariorolentity() {
+        return usuariorolentity;
+    }
+
+    public void setUsuariorolentity(Set<UsuarioRolEntity> usuariorolentity) {
+        this.usuariorolentity = usuariorolentity;
     }
 
     public UsuariosEntity(){

@@ -2,18 +2,16 @@ package com.example.backendh93p1.services;
 
 import com.example.backendh93p1.entity.UsuarioRolEntity;
 import com.example.backendh93p1.entity.UsuariosEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
-
+@Service
 public interface UsuarioServices {
 
-    /*Metodo Post*/
-    public UsuariosEntity guardarUsuario (UsuariosEntity usuariosEntity, Set<UsuarioRolEntity> usuarioRolEntity) throws Exception;
+    public UsuariosEntity guardarUsuarioService (UsuariosEntity usuariosEntity, Set<UsuarioRolEntity> usuarioRolEntity) throws Exception;
 
-    /*Metodo Get*/
-    public UsuariosEntity obtenerUsuario (String username);
+    public UsuariosEntity obtenerUsuarioService (String username);
 
-    /*Metodo $$$$$$$*/
-    public void eliminarUsuario (int idusurios);
+    public void eliminarUsuarioService (int idusurios);
 
 }

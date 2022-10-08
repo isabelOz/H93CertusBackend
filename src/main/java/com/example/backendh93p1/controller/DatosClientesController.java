@@ -4,7 +4,6 @@ import com.example.backendh93p1.entity.DatosClientesEntity;
 import com.example.backendh93p1.interfa.DatosClientesInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
