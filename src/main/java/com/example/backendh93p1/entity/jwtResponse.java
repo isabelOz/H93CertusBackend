@@ -12,7 +12,12 @@ public class jwtResponse {
         this.token = token;
     }
 
+    public jwtResponse (String token){
+        this.token = token;
+    }
+
     public jwtResponse (){
 
     }
+
 }

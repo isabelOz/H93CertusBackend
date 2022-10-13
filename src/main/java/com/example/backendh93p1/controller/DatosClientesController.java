@@ -1,7 +1,7 @@
 package com.example.backendh93p1.controller;
 
 import com.example.backendh93p1.entity.DatosClientesEntity;
-import com.example.backendh93p1.interfa.DatosClientesInterface;
+import com.example.backendh93p1.repository.DatosClientesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,32 +13,32 @@ import java.util.List;
 public class DatosClientesController {
 
     @Autowired
-    private DatosClientesInterface datosClientesInterface;
+    private DatosClientesRepository datosClientesRepository;
 
     @GetMapping
     public List<DatosClientesEntity> busquedaDatoCliente (){
-        return (List<DatosClientesEntity>) datosClientesInterface.findAll();
+        return (List<DatosClientesEntity>) datosClientesRepository.findAll();
     }
 
     @PostMapping
     public void crearDatoCliente (@RequestBody DatosClientesEntity DatCliEnt){
-        datosClientesInterface.save(DatCliEnt);
+        datosClientesRepository.save(DatCliEnt);
     }
 
     @PutMapping
     public void actualizarDatoCliente (@RequestBody DatosClientesEntity DatCliEnt){
-        datosClientesInterface.save(DatCliEnt);
+        datosClientesRepository.save(DatCliEnt);
     }
 
     @DeleteMapping (value = "/{id}")
     public void eliminarDatoCliente (@PathVariable ("id") Integer id){
-        datosClientesInterface.deleteById(id);
+        datosClientesRepository.deleteById(id);
     }
 
 
     @PutMapping (value = "/{id}")
     public ResponseEntity <DatosClientesEntity>  actualizarDatoClienteEspecifico (@PathVariable ("id") Integer id, @RequestBody DatosClientesEntity DatCliEntJson){
-        DatosClientesEntity DatCliEntBD = datosClientesInterface.findById(id).orElseThrow();
+        DatosClientesEntity DatCliEntBD = datosClientesRepository.findById(id).orElseThrow();
 
         //Apellido Vacio
         if (!(DatCliEntJson.getApellCliente() == null)){
@@ -59,7 +59,7 @@ public class DatosClientesController {
             DatCliEntBD.setDniCliente(DatCliEntJson.getDniCliente());
         }
 
-        DatosClientesEntity DatCliEntBDActu = datosClientesInterface.save(DatCliEntBD);
+        DatosClientesEntity DatCliEntBDActu = datosClientesRepository.save(DatCliEntBD);
 
         return ResponseEntity.ok(DatCliEntBDActu);
     }
