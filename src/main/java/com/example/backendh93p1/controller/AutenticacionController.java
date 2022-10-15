@@ -9,6 +9,8 @@ import com.example.backendh93p1.services.implement.UserDetailsServicesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +23,7 @@ public class AutenticacionController {
     private UserDetailsServicesImpl userDetail;
 
     @Autowired
-    private AuthenticationManager authenticationM;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private JwtUtilies jwtUtiles;
@@ -31,11 +33,10 @@ public class AutenticacionController {
         return (UsuariosEntity) userDetail.loadUserByUsername("");
     }
 
-    @PostMapping
+    @PostMapping("/generartoken")
     public ResponseEntity<?> generarToken (@RequestBody jwtRequest jwtR) throws Exception{
         try {
-            authenticationM.authenticate(new UsernamePasswordAuthenticationToken(jwtR.getUsername(),jwtR.getPassword()) {
-            });
+            this.autenticar(jwtR.getUsername(),jwtR.getPassword());
         }catch (Exception e){
             e.printStackTrace();
             throw new Exception ("Usuario mal registrado");
@@ -47,6 +48,15 @@ public class AutenticacionController {
         return ResponseEntity.ok(new jwtResponse(token));
     }
 
+    public void autenticar (String username,String password) throws Exception{
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,password));
+        }catch (DisabledException e){
+            throw new Exception("Usuario Desabilitado" + e.getMessage());
+        }catch (BadCredentialsException be){
+            throw new Exception("Credencial Erronea" + be.getMessage());
+        }
+    }
 
 
 }

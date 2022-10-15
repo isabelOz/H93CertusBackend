@@ -26,7 +26,7 @@ public class UsuarioController {
     }
 
 
-    @PostMapping
+    @PostMapping("/registrarUsuario")
     public UsuariosEntity agregarUsuario (@RequestBody UsuariosEntity userJsonEntity) throws Exception{
 
          Set<UsuarioRolEntity> userRolController =  new HashSet<>();

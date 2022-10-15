@@ -7,14 +7,17 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Component
-public class AutenticacionFilter {
+public class AutenticacionFilter extends OncePerRequestFilter {
 
     @Autowired
     private UserDetailsServicesImpl userDetailsImpl;
@@ -22,7 +25,9 @@ public class AutenticacionFilter {
     @Autowired
     private JwtUtilies jwtUtilies;
 
-    public void filtrarDatos (HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws Exception{
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String headerToken = request.getHeader("Authorization");
         String username = null;
         String tokenjwt = null;
@@ -33,9 +38,7 @@ public class AutenticacionFilter {
                 username  = this.jwtUtilies.extractUsername(tokenjwt);
             }catch (Exception e){
                 e.printStackTrace();
-                throw new Exception("Token Invalido");
             }
-
         }else {
             System.out.println("Token Invalido, no comienza con Bearer");
         }
