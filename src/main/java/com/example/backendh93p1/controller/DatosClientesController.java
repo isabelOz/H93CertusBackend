@@ -15,28 +15,28 @@ public class DatosClientesController {
     @Autowired
     private DatosClientesRepository datosClientesRepository;
 
-    @GetMapping
+    @GetMapping ("/listar")
     public List<DatosClientesEntity> busquedaDatoCliente (){
         return (List<DatosClientesEntity>) datosClientesRepository.findAll();
     }
 
-    @PostMapping
+    @PostMapping ("/insertar")
     public void crearDatoCliente (@RequestBody DatosClientesEntity DatCliEnt){
         datosClientesRepository.save(DatCliEnt);
     }
 
-    @PutMapping
+    @PutMapping ("/modificar")
     public void actualizarDatoCliente (@RequestBody DatosClientesEntity DatCliEnt){
         datosClientesRepository.save(DatCliEnt);
     }
 
-    @DeleteMapping (value = "/{id}")
+    @DeleteMapping (value = "/eliminar/{id}")
     public void eliminarDatoCliente (@PathVariable ("id") Integer id){
         datosClientesRepository.deleteById(id);
     }
 
 
-    @PutMapping (value = "/{id}")
+    @PutMapping (value = "/modificardato/{id}")
     public ResponseEntity <DatosClientesEntity>  actualizarDatoClienteEspecifico (@PathVariable ("id") Integer id, @RequestBody DatosClientesEntity DatCliEntJson){
         DatosClientesEntity DatCliEntBD = datosClientesRepository.findById(id).orElseThrow();
 

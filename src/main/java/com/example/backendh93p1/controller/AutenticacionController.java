@@ -15,8 +15,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/autenticacion")
+@CrossOrigin("*")
 public class AutenticacionController {
 
     @Autowired
@@ -29,8 +32,8 @@ public class AutenticacionController {
     private JwtUtilies jwtUtiles;
 
     @GetMapping("/userloggin")
-    public UsuariosEntity obtenerUsuario (){
-        return (UsuariosEntity) userDetail.loadUserByUsername("");
+    public UsuariosEntity obtenerUsuario (Principal principal){
+        return (UsuariosEntity) userDetail.loadUserByUsername(principal.getName());
     }
 
     @PostMapping("/generartoken")
