@@ -5,9 +5,11 @@ import com.example.backendh93p1.entity.Pregunta;
 import com.example.backendh93p1.repository.PreguntaRepository;
 import com.example.backendh93p1.services.PreguntaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class PreguntaServiceImpl implements PreguntaService {
 
     @Autowired

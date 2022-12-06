@@ -2,9 +2,11 @@ package com.example.backendh93p1.services;
 
 import com.example.backendh93p1.entity.Examen;
 import com.example.backendh93p1.entity.Pregunta;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public interface PreguntaService {
 
     Pregunta agregarPregunta(Pregunta pregunta);

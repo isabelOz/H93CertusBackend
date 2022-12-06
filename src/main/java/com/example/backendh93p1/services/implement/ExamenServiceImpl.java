@@ -6,11 +6,13 @@ import com.example.backendh93p1.entity.Examen;
 import com.example.backendh93p1.repository.ExamenRepository;
 import com.example.backendh93p1.services.ExamenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class ExamenServiceImpl implements ExamenService {
 
     @Autowired

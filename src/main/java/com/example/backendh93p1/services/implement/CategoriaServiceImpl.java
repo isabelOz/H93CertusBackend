@@ -4,10 +4,12 @@ import com.example.backendh93p1.entity.Categoria;
 import com.example.backendh93p1.repository.CategoriaRepository;
 import com.example.backendh93p1.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@Service
 public class CategoriaServiceImpl implements CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;

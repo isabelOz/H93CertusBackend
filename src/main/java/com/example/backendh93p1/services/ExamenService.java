@@ -2,10 +2,12 @@ package com.example.backendh93p1.services;
 
 import com.example.backendh93p1.entity.Categoria;
 import com.example.backendh93p1.entity.Examen;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 
+@Service
 public interface ExamenService {
 
     Examen agregarExamen(Examen examen);
