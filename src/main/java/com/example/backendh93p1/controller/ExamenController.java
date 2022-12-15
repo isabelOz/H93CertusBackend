@@ -17,27 +17,27 @@ public class ExamenController {
     @Autowired
     private ExamenService examenService;
 
-    @PostMapping("/")
+    @PostMapping("/agregar")
     public ResponseEntity<Examen> guardarExamen(@RequestBody Examen examen){
         return ResponseEntity.ok(examenService.agregarExamen(examen));
     }
 
-    @PutMapping("/")
+    @PutMapping("/modificar")
     public ResponseEntity<Examen> actualizarExamen(@RequestBody Examen examen){
         return ResponseEntity.ok(examenService.actualizarExamen(examen));
     }
 
-    @GetMapping("/")
+    @GetMapping("/obtener")
     public ResponseEntity<?> listarExamenes(){
         return ResponseEntity.ok(examenService.obtenerExamenes());
     }
 
-    @GetMapping("/{examenId}")
+    @GetMapping("/obtener/{examenId}")
     public Examen listarExamen(@PathVariable("examenId") Long examenId){
         return examenService.obtenerExamen(examenId);
     }
 
-    @DeleteMapping("/{examenId}")
+    @DeleteMapping("/eliminar/{examenId}")
     public void eliminarExamen(@PathVariable("examenId") Long examenId){
         examenService.eliminarExamen(examenId);
     }

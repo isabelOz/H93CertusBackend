@@ -23,12 +23,12 @@ public class PreguntasController {
     @Autowired
     private ExamenService examenService;
 
-    @PostMapping("/")
+    @PostMapping("/agregar")
     public ResponseEntity<Pregunta> guardarPregunta(@RequestBody Pregunta pregunta){
         return ResponseEntity.ok(preguntaService.agregarPregunta(pregunta));
     }
 
-    @PutMapping("/")
+    @PutMapping("/modificar")
     public ResponseEntity<Pregunta> actualizarPregunta(@RequestBody Pregunta pregunta){
         return ResponseEntity.ok(preguntaService.actualizarPregunta(pregunta));
     }
@@ -47,12 +47,12 @@ public class PreguntasController {
         return ResponseEntity.ok(examenes);
     }
 
-    @GetMapping("/{preguntaId}")
+    @GetMapping("/obtener/{preguntaId}")
     public Pregunta listarPreguntaPorId(@PathVariable("preguntaId") Long preguntaId){
         return preguntaService.obtenerPregunta(preguntaId);
     }
 
-    @DeleteMapping("/{preguntaId}")
+    @DeleteMapping("/eliminar/{preguntaId}")
     public void eliminarPregunta(@PathVariable("preguntaId") Long preguntaId){
         preguntaService.eliminarPregunta(preguntaId);
     }

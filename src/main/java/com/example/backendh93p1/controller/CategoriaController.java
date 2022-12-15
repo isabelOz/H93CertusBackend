@@ -14,7 +14,7 @@ public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
-    @PostMapping("/")
+    @PostMapping("/agregar")
     public ResponseEntity<Categoria> guardarCategoria(@RequestBody Categoria categoria){
         Categoria categoriaGuardada = categoriaService.agregarCategoria(categoria);
         return ResponseEntity.ok(categoriaGuardada);
@@ -25,17 +25,17 @@ public class CategoriaController {
         return categoriaService.obtenerCategoria(categoriaId);
     }
 
-    @GetMapping("/")
+    @GetMapping("/obtener")
     public ResponseEntity<?> listarCategorias(){
         return ResponseEntity.ok(categoriaService.obtenerCategorias());
     }
 
-    @PutMapping("/")
+    @PutMapping("/modificar")
     public Categoria actualizarCategoria(@RequestBody Categoria categoria){
         return categoriaService.actualizarCategoria(categoria);
     }
 
-    @DeleteMapping("/{categoriaId}")
+    @DeleteMapping("/eliminar/{categoriaId}")
     public void eliminarCategoria(@PathVariable("categoriaId") Long categoriaId){
         categoriaService.eliminarCategoria(categoriaId);
     }
